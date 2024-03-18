@@ -1,0 +1,1 @@
+[![Java CI with Gradle](https://github.com/ck29/tf-account-management/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/ck29/tf-account-management/actions/workflows/gradle.yml)
