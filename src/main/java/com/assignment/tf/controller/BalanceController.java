@@ -1,10 +1,12 @@
 package com.assignment.tf.controller;
 
-import com.assignment.tf.controller.request.CreateAccountRequest;
-import com.assignment.tf.controller.request.UpdateAccountRequest;
-import com.assignment.tf.controller.response.AccountResponse;
-import com.assignment.tf.services.AccountService;
+
 import com.assignment.swagger.SwaggerResources;
+import com.assignment.tf.controller.request.CreateAccountRequest;
+import com.assignment.tf.controller.request.TransactionRequest;
+import com.assignment.tf.controller.response.AccountResponse;
+import com.assignment.tf.controller.response.BalanceResponse;
+import com.assignment.tf.services.BalanceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Tag(name= SwaggerResources.ACCOUNT_CONTROLLER)
-@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AccountController {
+@Tag(name= SwaggerResources.BALANCE_CONTROLLER)
+@RequestMapping(value = "/balance", produces = MediaType.APPLICATION_JSON_VALUE)
+public class BalanceController {
 
-  public final AccountService accountService;
+  private final BalanceService balanceService;
 
   @GetMapping("/{account-id}")
   @ApiResponses(value = {
@@ -40,40 +41,37 @@ public class AccountController {
       @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
   })
   @Operation(
-      summary = "Account detail retrieval"
+      summary = "balance retrieval"
   )
-  public AccountResponse getAccountById(@PathVariable("account-id") String accountId){
-    log.info("Retrieving account for account id {}.", accountId);
-    return accountService.retrieveAccount(accountId);
+  public BalanceResponse getAccountBalance(@PathVariable("account-id") String accountId){
+    log.info("Retrieving account balance for account id {}.", accountId);
+    return balanceService.getBalance(accountId);
   }
 
-  @PostMapping("/new")
+  @PutMapping("/credit")
   @ApiResponses(value = {
-      @ApiResponse(responseCode = "201", description = "OK"),
-      @ApiResponse(responseCode = "409", description = "Already exists.", content = @Content),
+      @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),
   })
   @Operation(
-      summary = "create new account."
+      summary = "credit amount."
   )
-  @ResponseStatus(HttpStatus.CREATED)
-  public AccountResponse createAccount(@Valid @RequestBody final CreateAccountRequest createAccountRequest){
-    log.info("Create account request received.");
-    return accountService.createAccount(createAccountRequest);
+  public BalanceResponse creditAmount(@Valid @RequestBody final TransactionRequest creditRequest){
+    log.info("credit request received.");
+    return balanceService.credit(creditRequest);
   }
 
-
-  @DeleteMapping("/{account-id}")
+  @PutMapping("/debit")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
-      @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+      @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),
   })
   @Operation(
-      summary = "delete account."
+      summary = "debit amount."
   )
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteAccount(@PathVariable("account-id") String accountId){
-    log.info("delete account request received.");
-    accountService.removeAccount(accountId);
+  public BalanceResponse debitAmount(@Valid @RequestBody final TransactionRequest debitRequest){
+    log.info("credit request received.");
+    return balanceService.debit(debitRequest);
   }
+
 }
