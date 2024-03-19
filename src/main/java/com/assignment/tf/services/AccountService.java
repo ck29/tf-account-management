@@ -27,8 +27,8 @@ public class AccountService {
   public AccountResponse createAccount(CreateAccountRequest createAccountRequest) {
 
     AccountEntity account = repositoryService.createAccount(createAccountRequest);
-    TransactionResponse transactionResponse = balanceService.createAccount(account.getAccountId(), createAccountRequest.getOpeningBalance());
-    return mapper.mapToAccount(account,transactionResponse);
+    BalanceResponse balanceResponse = balanceService.createAccount(account.getAccountId(), createAccountRequest.getOpeningBalance());
+    return mapper.mapToAccount(account,balanceResponse);
 
   }
 

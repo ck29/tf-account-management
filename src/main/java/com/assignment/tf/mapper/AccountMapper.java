@@ -2,7 +2,6 @@ package com.assignment.tf.mapper;
 
 import com.assignment.tf.controller.response.AccountResponse;
 import com.assignment.tf.controller.response.BalanceResponse;
-import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.repositories.entities.AccountEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +16,4 @@ public class AccountMapper {
         .setBalance(balance.getBalance());
   }
 
-  public static AccountResponse mapToAccount(AccountEntity entity, TransactionResponse transactionResponse){
-    return new AccountResponse()
-        .setAccountId(entity.getAccountId())
-        .setName(entity.getName())
-        .setEmail(entity.getEmail())
-        .setBalance(transactionResponse.getLastTransactionAmount());
-  }
 }

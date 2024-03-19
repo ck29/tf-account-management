@@ -66,6 +66,7 @@ public class BalanceController {
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),
+      @ApiResponse(responseCode = "404", description = "Not found.", content = @Content),
   })
   @Operation(
       summary = "debit amount."

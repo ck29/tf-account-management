@@ -21,6 +21,12 @@ public class BalanceRepositoryService {
     return repository.findById(accountId);
   }
 
+  public BalanceEntity createAccount(String accountId, BigDecimal creditAmount){
+    return repository.save(new BalanceEntity()
+        .setBalance(creditAmount)
+        .setAccountId(accountId));
+  }
+
 
   public BalanceEntity add(String accountId, BigDecimal creditAmount){
     Optional<BalanceEntity> optionalBalance = getBalance(accountId);
@@ -31,9 +37,7 @@ public class BalanceRepositoryService {
       balance.setBalance(balance.getBalance().add(creditAmount));
       balance.setLastTransactionAmount(creditAmount);
     }else{
-      balance = new BalanceEntity()
-          .setBalance(creditAmount)
-          .setAccountId(accountId);
+      throw new AccountNotFoundException();
     }
     return repository.save(balance);
   }

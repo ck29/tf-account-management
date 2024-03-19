@@ -25,8 +25,8 @@ public class BalanceService {
 
   }
 
-  public TransactionResponse createAccount(String accountId, BigDecimal openingBalance) {
-    return credit(accountId, openingBalance);
+  public BalanceResponse createAccount(String accountId, BigDecimal openingBalance) {
+    return BalanceMapper.mapToBalanceResponse(balanceRepositoryService.createAccount(accountId, openingBalance));
   }
 
   public void removeAccount(String accountId) {
