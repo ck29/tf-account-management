@@ -18,6 +18,9 @@ public class BalanceEntity {
   @Column(name= "account-id")
   private String accountId;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "balance", nullable = false)
   private BigDecimal balance;
+
+  @Column(name = "last-transaction-amount", nullable = true)
+  private BigDecimal lastTransactionAmount;
 }

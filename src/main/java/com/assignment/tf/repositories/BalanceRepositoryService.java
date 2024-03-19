@@ -29,6 +29,7 @@ public class BalanceRepositoryService {
     if(optionalBalance.isPresent()) {
       balance = optionalBalance.get();
       balance.setBalance(balance.getBalance().add(creditAmount));
+      balance.setLastTransactionAmount(creditAmount);
     }else{
       balance = new BalanceEntity()
           .setBalance(creditAmount)
@@ -44,7 +45,7 @@ public class BalanceRepositoryService {
     if(optionalBalance.isPresent()){
       balance = optionalBalance.get();
       balance.setBalance(balance.getBalance().subtract(debitAmount));
-
+      balance.setLastTransactionAmount(debitAmount);
       if(balance.getBalance().compareTo(MIN_BALANCE) < 0){
         throw new InsufficientFundException();
       }

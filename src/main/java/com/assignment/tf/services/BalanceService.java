@@ -3,6 +3,7 @@ package com.assignment.tf.services;
 import com.assignment.tf.controller.request.TransactionRequest;
 import com.assignment.tf.controller.response.AccountResponse;
 import com.assignment.tf.controller.response.BalanceResponse;
+import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.exception.AccountNotFoundException;
 import com.assignment.tf.mapper.BalanceMapper;
 import com.assignment.tf.repositories.BalanceRepositoryService;
@@ -24,7 +25,7 @@ public class BalanceService {
 
   }
 
-  public BalanceResponse createAccount(String accountId, BigDecimal openingBalance) {
+  public TransactionResponse createAccount(String accountId, BigDecimal openingBalance) {
     return credit(accountId, openingBalance);
   }
 
@@ -32,19 +33,19 @@ public class BalanceService {
     balanceRepositoryService.removeAccount(accountId);
   }
 
-  public BalanceResponse credit(String accountId, BigDecimal creditAmount){
-    return BalanceMapper.mapToBalanceResponse(balanceRepositoryService.add(accountId,creditAmount));
+  public TransactionResponse credit(String accountId, BigDecimal creditAmount){
+    return BalanceMapper.mapToTransactionResponse(balanceRepositoryService.add(accountId,creditAmount), creditAmount);
   }
 
-  public BalanceResponse debit(String accountId, BigDecimal debitAmount){
-    return BalanceMapper.mapToBalanceResponse(balanceRepositoryService.deduct(accountId, debitAmount));
+  public TransactionResponse debit(String accountId, BigDecimal debitAmount){
+    return BalanceMapper.mapToTransactionResponse(balanceRepositoryService.deduct(accountId, debitAmount), debitAmount);
   }
 
-  public BalanceResponse credit(TransactionRequest creditRequest) {
+  public TransactionResponse credit(TransactionRequest creditRequest) {
     return credit(creditRequest.getAccountId(), creditRequest.getAmount());
   }
 
-  public BalanceResponse debit(TransactionRequest debitRequest) {
+  public TransactionResponse debit(TransactionRequest debitRequest) {
     return debit(debitRequest.getAccountId(), debitRequest.getAmount());
   }
 }
