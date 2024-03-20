@@ -14,7 +14,7 @@ public class AccountRepositoryService {
   private final AccountRepository repository;
 
   public AccountEntity getAccount(String accountId){
-    return repository.findById(accountId).orElseThrow(() -> new AccountNotFoundException());
+    return repository.findById(accountId).orElseThrow(AccountNotFoundException::new);
   }
 
   public AccountEntity findAccount(String email){

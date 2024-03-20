@@ -15,4 +15,5 @@ public class AccountMapper {
         .setEmail(entity.getEmail())
         .setBalance(balance.getBalance());
   }
+
 }

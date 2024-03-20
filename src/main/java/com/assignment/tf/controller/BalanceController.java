@@ -6,6 +6,7 @@ import com.assignment.tf.controller.request.CreateAccountRequest;
 import com.assignment.tf.controller.request.TransactionRequest;
 import com.assignment.tf.controller.response.AccountResponse;
 import com.assignment.tf.controller.response.BalanceResponse;
+import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.services.BalanceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -48,7 +49,7 @@ public class BalanceController {
     return balanceService.getBalance(accountId);
   }
 
-  @PutMapping("/credit")
+  @PostMapping("/credit")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),
@@ -56,20 +57,21 @@ public class BalanceController {
   @Operation(
       summary = "credit amount."
   )
-  public BalanceResponse creditAmount(@Valid @RequestBody final TransactionRequest creditRequest){
+  public TransactionResponse creditAmount(@Valid @RequestBody final TransactionRequest creditRequest){
     log.info("credit request received.");
     return balanceService.credit(creditRequest);
   }
 
-  @PutMapping("/debit")
+  @PostMapping("/debit")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),
+      @ApiResponse(responseCode = "404", description = "Not found.", content = @Content),
   })
   @Operation(
       summary = "debit amount."
   )
-  public BalanceResponse debitAmount(@Valid @RequestBody final TransactionRequest debitRequest){
+  public TransactionResponse debitAmount(@Valid @RequestBody final TransactionRequest debitRequest){
     log.info("credit request received.");
     return balanceService.debit(debitRequest);
   }

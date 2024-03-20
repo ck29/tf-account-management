@@ -7,11 +7,11 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class BalanceResponse {
+public class TransactionResponse{
+
   @Schema(requiredMode = RequiredMode.REQUIRED, example = "ace4e1-e23cb-3eaddf-45ffbcea")
   private String accountId;
 
-  @Schema(requiredMode = RequiredMode.NOT_REQUIRED, example = "500")
-  private String balance;
-
+  @Schema(requiredMode = RequiredMode.REQUIRED, example = "500")
+  private String lastTransactionAmount;
 }
