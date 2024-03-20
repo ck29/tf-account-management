@@ -49,7 +49,7 @@ public class BalanceController {
     return balanceService.getBalance(accountId);
   }
 
-  @PutMapping("/credit")
+  @PostMapping("/credit")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),
@@ -62,7 +62,7 @@ public class BalanceController {
     return balanceService.credit(creditRequest);
   }
 
-  @PutMapping("/debit")
+  @PostMapping("/debit")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "400", description = "Bad request.", content = @Content),

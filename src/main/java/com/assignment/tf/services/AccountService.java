@@ -3,7 +3,6 @@ package com.assignment.tf.services;
 import com.assignment.tf.controller.request.CreateAccountRequest;
 import com.assignment.tf.controller.response.AccountResponse;
 import com.assignment.tf.controller.response.BalanceResponse;
-import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.mapper.AccountMapper;
 import com.assignment.tf.repositories.AccountRepositoryService;
 import com.assignment.tf.repositories.entities.AccountEntity;
@@ -21,14 +20,14 @@ public class AccountService {
   public AccountResponse retrieveAccount(String accountId) {
     AccountEntity accountEntity = repositoryService.getAccount(accountId);
     BalanceResponse balanceResponse= balanceService.getBalance(accountId);
-    return mapper.mapToAccount(accountEntity, balanceResponse);
+    return AccountMapper.mapToAccount(accountEntity, balanceResponse);
   }
 
   public AccountResponse createAccount(CreateAccountRequest createAccountRequest) {
 
     AccountEntity account = repositoryService.createAccount(createAccountRequest);
     BalanceResponse balanceResponse = balanceService.createAccount(account.getAccountId(), createAccountRequest.getOpeningBalance());
-    return mapper.mapToAccount(account,balanceResponse);
+    return AccountMapper.mapToAccount(account,balanceResponse);
 
   }
 
