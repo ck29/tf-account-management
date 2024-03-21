@@ -36,7 +36,7 @@ public class AccountControllerTest  extends AbstractControllerIntegrationTest{
         .setName("aName")
         .setOpeningBalance(new BigDecimal("500.00"));
 
-    MvcResult result = performPost("/new", request)
+    MvcResult result = performPost("/accounts", request)
         .andExpect(status().is2xxSuccessful())
         .andReturn();
   }
@@ -49,8 +49,8 @@ public class AccountControllerTest  extends AbstractControllerIntegrationTest{
         .setOpeningBalance(new BigDecimal("500.00"));
 
     accountRepository.save(new AccountEntity().setEmail("aEmail@email.com")
-        .setName("someName"));
-    MvcResult result = performPost("/new", request)
+        .setName("someName").setIban("aIban"));
+    MvcResult result = performPost("/accounts", request)
         .andExpect(status().is4xxClientError())
         .andReturn();
   }

@@ -31,7 +31,7 @@ public class BalanceControllerTest extends AbstractControllerIntegrationTest{
   @Test
   void test_getBalance() throws Exception {
 
-    balanceRepository.save(new BalanceEntity().setAccountId("abc").setBalance(new BigDecimal(1000)));
+    balanceRepository.save(new BalanceEntity().setIban("abc").setBalance(new BigDecimal(1000)));
 
     performGet("/balance/abc" )
         .andExpect(status().isOk())
@@ -41,7 +41,7 @@ public class BalanceControllerTest extends AbstractControllerIntegrationTest{
   @Test
   void test_credit() throws Exception {
 
-    balanceRepository.save(new BalanceEntity().setAccountId("abc").setBalance(new BigDecimal(1000)));
+    balanceRepository.save(new BalanceEntity().setIban("abc").setBalance(new BigDecimal(1000)));
     TransactionRequest request = new TransactionRequest().setAccountId("abc").setAmount(new BigDecimal("500"));
     performPost("/balance/credit",request )
         .andExpect(status().isOk())
@@ -51,7 +51,7 @@ public class BalanceControllerTest extends AbstractControllerIntegrationTest{
   @Test
   void test_debit() throws Exception {
 
-    balanceRepository.save(new BalanceEntity().setAccountId("abc").setBalance(new BigDecimal(1000)));
+    balanceRepository.save(new BalanceEntity().setIban("abc").setBalance(new BigDecimal(1000)));
 
     TransactionRequest request = new TransactionRequest().setAccountId("abc").setAmount(new BigDecimal("100"));
 

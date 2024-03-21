@@ -29,12 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Tag(name= SwaggerResources.ACCOUNT_CONTROLLER)
-@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
 
   public final AccountService accountService;
 
-  @GetMapping("/{account-id}")
+  @GetMapping("/{iban}")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
@@ -42,12 +42,12 @@ public class AccountController {
   @Operation(
       summary = "Account detail retrieval"
   )
-  public AccountResponse getAccountById(@PathVariable("account-id") String accountId){
+  public AccountResponse getAccountById(@PathVariable("iban") String accountId){
     log.info("Retrieving account for account id {}.", accountId);
     return accountService.retrieveAccount(accountId);
   }
 
-  @PostMapping("/new")
+  @PostMapping
   @ApiResponses(value = {
       @ApiResponse(responseCode = "201", description = "OK"),
       @ApiResponse(responseCode = "409", description = "Already exists.", content = @Content),
@@ -62,18 +62,4 @@ public class AccountController {
     return accountService.createAccount(createAccountRequest);
   }
 
-
-  @DeleteMapping("/{account-id}")
-  @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "OK"),
-      @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
-  })
-  @Operation(
-      summary = "delete account."
-  )
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteAccount(@PathVariable("account-id") String accountId){
-    log.info("delete account request received.");
-    accountService.removeAccount(accountId);
-  }
-}
+ }

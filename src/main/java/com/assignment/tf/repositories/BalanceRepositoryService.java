@@ -24,7 +24,8 @@ public class BalanceRepositoryService {
   public BalanceEntity createAccount(String accountId, BigDecimal creditAmount){
     return repository.save(new BalanceEntity()
         .setBalance(creditAmount)
-        .setAccountId(accountId));
+        .setLastTransactionAmount(creditAmount)
+        .setIban(accountId));
   }
 
 

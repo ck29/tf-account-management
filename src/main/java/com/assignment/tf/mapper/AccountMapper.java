@@ -10,7 +10,7 @@ public class AccountMapper {
 
   public static AccountResponse mapToAccount(AccountEntity entity, BalanceResponse balance){
     return new AccountResponse()
-        .setAccountId(entity.getAccountId())
+        .setAccountId(entity.getIban())
         .setName(entity.getName())
         .setEmail(entity.getEmail())
         .setBalance(balance.getBalance());

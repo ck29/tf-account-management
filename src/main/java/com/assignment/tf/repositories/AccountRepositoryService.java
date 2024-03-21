@@ -4,6 +4,7 @@ import com.assignment.tf.controller.request.CreateAccountRequest;
 import com.assignment.tf.exception.AccountAlreadyExistsException;
 import com.assignment.tf.exception.AccountNotFoundException;
 import com.assignment.tf.repositories.entities.AccountEntity;
+import com.assignment.tf.util.AccountUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class AccountRepositoryService {
   private final AccountRepository repository;
 
   public AccountEntity getAccount(String accountId){
-    return repository.findById(accountId).orElseThrow(AccountNotFoundException::new);
+    return repository.findByIban(accountId).orElseThrow(AccountNotFoundException::new);
   }
 
   public AccountEntity findAccount(String email){
@@ -23,9 +24,11 @@ public class AccountRepositoryService {
 
   public AccountEntity createAccount(CreateAccountRequest createAccountRequest) {
     if(findAccount(createAccountRequest.getEmail()) == null){
+
       AccountEntity entity = new AccountEntity()
           .setName(createAccountRequest.getName())
-          .setEmail(createAccountRequest.getEmail());
+          .setEmail(createAccountRequest.getEmail())
+          .setIban(AccountUtil.createIban());
       return repository.save(entity);
     }else{
       throw new AccountAlreadyExistsException();
@@ -33,7 +36,4 @@ public class AccountRepositoryService {
 
   }
 
-  public void removeAccount(String accountId) {
-    repository.deleteById(accountId);
-  }
 }

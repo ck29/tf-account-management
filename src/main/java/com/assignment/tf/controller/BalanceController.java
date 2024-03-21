@@ -36,7 +36,7 @@ public class BalanceController {
 
   private final BalanceService balanceService;
 
-  @GetMapping("/{account-id}")
+  @GetMapping("/{iban}")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "OK"),
       @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
@@ -44,7 +44,7 @@ public class BalanceController {
   @Operation(
       summary = "balance retrieval"
   )
-  public BalanceResponse getAccountBalance(@PathVariable("account-id") String accountId){
+  public BalanceResponse getAccountBalance(@PathVariable("iban") String accountId){
     log.info("Retrieving account balance for account id {}.", accountId);
     return balanceService.getBalance(accountId);
   }

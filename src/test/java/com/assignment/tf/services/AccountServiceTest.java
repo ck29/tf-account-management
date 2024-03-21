@@ -11,7 +11,6 @@ import com.assignment.tf.exception.AccountAlreadyExistsException;
 import com.assignment.tf.exception.AccountNotFoundException;
 import com.assignment.tf.repositories.AccountRepositoryService;
 import com.assignment.tf.repositories.entities.AccountEntity;
-import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -65,7 +64,7 @@ class AccountServiceTest {
 
   private AccountEntity mockAccountEntity(){
     return new AccountEntity().setEmail("aAccountEmail")
-        .setAccountId("aAccount")
+        .setIban("aAccount")
         .setName("aName");
   }
   private BalanceResponse mockBalanceResponse(){

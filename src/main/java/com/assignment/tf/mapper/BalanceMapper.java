@@ -12,12 +12,12 @@ public class BalanceMapper {
   public static BalanceResponse mapToBalanceResponse(BalanceEntity entity){
     return new BalanceResponse()
         .setBalance(String.valueOf(entity.getBalance()))
-        .setAccountId(entity.getAccountId());
+        .setAccountId(entity.getIban());
   }
 
   public static TransactionResponse mapToTransactionResponse(BalanceEntity entity, BigDecimal lastTransaction){
     return new TransactionResponse()
         .setLastTransactionAmount(String.valueOf(lastTransaction))
-        .setAccountId(entity.getAccountId());
+        .setAccountId(entity.getIban());
   }
 }
