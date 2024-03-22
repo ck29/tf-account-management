@@ -117,7 +117,7 @@ Make sure the following tools are installed on your local machine.
   
  Response: 
   {
-  "accountId": "dd209c43-8344-4b43-96ea-c5dd6760a7f6",
+  "accountId": "NL66ABNA0112234968",
   "name": "Tony",
   "email": "Tony@tf.com",
   "balance": "2000"
@@ -131,13 +131,13 @@ Make sure the following tools are installed on your local machine.
    Host: localhost:8080
    Content-Type: application/json
    {
-      "accountId": "dd209c43-8344-4b43-96ea-c5dd6760a7f6",
+      "accountId": "NL66ABNA0112234968",
       "amount": 200
    }
    
    Response
    {
-  "accountId": "dd209c43-8344-4b43-96ea-c5dd6760a7f6",
+  "accountId": "NL66ABNA0112234968",
   "lastTransactionAmount": "200"
   }
    ```
