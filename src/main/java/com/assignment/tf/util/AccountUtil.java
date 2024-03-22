@@ -3,6 +3,10 @@ package com.assignment.tf.util;
 import java.security.SecureRandom;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
+import org.iban4j.IbanFormatException;
+import org.iban4j.IbanUtil;
+import org.iban4j.InvalidCheckDigitException;
+import org.iban4j.UnsupportedCountryException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,5 +27,12 @@ public class AccountUtil {
         .nextInt(MAX_BOUND - MIN_BOUND + 1) + MAX_BOUND);
   }
 
-
+  public static boolean isValidIban(String iban){
+    try {
+      IbanUtil.validate(iban);
+      return true;
+    } catch (IbanFormatException | InvalidCheckDigitException | UnsupportedCountryException e) {
+      return false;
+    }
+  }
 }

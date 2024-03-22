@@ -1,10 +1,10 @@
 package com.assignment.tf.controller;
 
-import com.assignment.tf.controller.request.CreateAccountRequest;
-import com.assignment.tf.controller.request.UpdateAccountRequest;
-import com.assignment.tf.controller.response.AccountResponse;
-import com.assignment.tf.services.AccountService;
 import com.assignment.swagger.SwaggerResources;
+import com.assignment.tf.controller.request.CreateAccountRequest;
+import com.assignment.tf.controller.response.AccountResponse;
+import com.assignment.tf.controller.validator.Iban;
+import com.assignment.tf.services.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,11 +15,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -42,9 +40,9 @@ public class AccountController {
   @Operation(
       summary = "Account detail retrieval"
   )
-  public AccountResponse getAccountById(@PathVariable("iban") String accountId){
-    log.info("Retrieving account for account id {}.", accountId);
-    return accountService.retrieveAccount(accountId);
+  public AccountResponse getAccountById(@PathVariable @Iban String iban){
+    log.info("Retrieving account for account id {}.", iban);
+    return accountService.retrieveAccount(iban);
   }
 
   @PostMapping
