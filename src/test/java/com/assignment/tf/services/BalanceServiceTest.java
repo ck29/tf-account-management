@@ -61,7 +61,7 @@ class BalanceServiceTest {
   private Optional<BalanceEntity> mockOptionalBalanceEntity(){
     return Optional.of(new BalanceEntity()
         .setLastTransactionAmount(new BigDecimal(500))
-        .setAccountId("aAccount")
+        .setIban("aAccount")
         .setBalance(new BigDecimal(1000)));
   }
 }

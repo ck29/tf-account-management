@@ -24,7 +24,6 @@ public class CreateAccountRequest {
   private String email;
 
   @DecimalMin(value = "0.0", inclusive = false)
-  @Digits(integer=3, fraction=2)
   @Schema(requiredMode = RequiredMode.REQUIRED, example = "2000.00")
   private BigDecimal openingBalance;
 

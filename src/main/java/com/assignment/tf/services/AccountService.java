@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AccountService {
-  private final AccountMapper mapper;
+
 
   private final AccountRepositoryService repositoryService;
   private final BalanceService balanceService;
@@ -26,13 +26,10 @@ public class AccountService {
   public AccountResponse createAccount(CreateAccountRequest createAccountRequest) {
 
     AccountEntity account = repositoryService.createAccount(createAccountRequest);
-    BalanceResponse balanceResponse = balanceService.createAccount(account.getAccountId(), createAccountRequest.getOpeningBalance());
+    BalanceResponse balanceResponse = balanceService.createAccount(account.getIban(), createAccountRequest.getOpeningBalance());
     return AccountMapper.mapToAccount(account,balanceResponse);
 
   }
 
-  public void removeAccount(String accountId) {
-    repositoryService.removeAccount(accountId);
-    balanceService.removeAccount(accountId);
-  }
+
 }

@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AccountResponse {
 
-  @Schema(requiredMode = RequiredMode.REQUIRED, example = "ace4e1-e23cb-3eaddf-45ffbcea")
+  @Schema(requiredMode = RequiredMode.REQUIRED, example = "NL66ABNA0112234968")
   private String accountId;
 
   @Schema(requiredMode = RequiredMode.REQUIRED, example = "Tony")
