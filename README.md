@@ -106,7 +106,7 @@ Make sure the following tools are installed on your local machine.
 
 ### Create new account
 ```shell
-   POST /tf/service/account/new HTTP/1.1
+   POST account-service/v1/api/accounts HTTP/1.1
    Host: localhost:8080
    Content-Type: application/json
    {
@@ -127,7 +127,7 @@ Make sure the following tools are installed on your local machine.
 
 ### Debit
 ```shell
-   POST /tf/service/account/balance/debit HTTP/1.1
+   POST account-service/v1/api/balance/debit HTTP/1.1
    Host: localhost:8080
    Content-Type: application/json
    {
